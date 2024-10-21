@@ -15,10 +15,24 @@ compose-plugin = "1.6.11"
 junit = "4.13.2"
 kotlin = "2.0.20"
 kotlinx-coroutines = "1.9.0"
+
+#tv app
 composeBom = "2024.04.01"
 tvFoundation = "1.0.0-alpha11"
 tvMaterial = "1.0.0"
 lifecycleRuntimeKtx = "2.8.6"
+
+#wear app
+playServicesWearable = "18.2.0"
+composeMaterial = "1.2.1"
+composeFoundation = "1.2.1"
+wearToolingPreview = "1.0.0"
+coreSplashscreen = "1.0.1"
+tiles = "1.1.0"
+tilesMaterial = "1.1.0"
+horologistComposeTools = "0.4.8"
+horologistTiles = "0.4.8"
+watchfaceComplicationsDataSourceKtx = "1.1.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -42,6 +56,17 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-tv-foundation = { group = "androidx.tv", name = "tv-foundation", version.ref = "tvFoundation" }
 androidx-tv-material = { group = "androidx.tv", name = "tv-material", version.ref = "tvMaterial" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+play-services-wearable = { group = "com.google.android.gms", name = "play-services-wearable", version.ref = "playServicesWearable" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterial" }
+androidx-compose-foundation = { group = "androidx.wear.compose", name = "compose-foundation", version.ref = "composeFoundation" }
+androidx-wear-tooling-preview = { group = "androidx.wear", name = "wear-tooling-preview", version.ref = "wearToolingPreview" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-tiles = { group = "androidx.wear.tiles", name = "tiles", version.ref = "tiles" }
+androidx-tiles-material = { group = "androidx.wear.tiles", name = "tiles-material", version.ref = "tilesMaterial" }
+horologist-compose-tools = { group = "com.google.android.horologist", name = "horologist-compose-tools", version.ref = "horologistComposeTools" }
+horologist-tiles = { group = "com.google.android.horologist", name = "horologist-tiles", version.ref = "horologistTiles" }
+androidx-watchface-complications-data-source-ktx = { group = "androidx.wear.watchface", name = "watchface-complications-data-source-ktx", version.ref = "watchfaceComplicationsDataSourceKtx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
