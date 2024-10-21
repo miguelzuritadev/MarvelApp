@@ -24,6 +24,7 @@ import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import androidx.wear.tooling.preview.devices.WearDevices
+import com.unlam.marvel.CommonGreeting
 import com.unlam.marvelwearapp.R
 import com.unlam.marvelwearapp.presentation.theme.MarvelAppTheme
 
@@ -36,7 +37,7 @@ class MainActivity : ComponentActivity() {
         setTheme(android.R.style.Theme_DeviceDefault)
 
         setContent {
-            WearApp("Android")
+            WearApp(CommonGreeting().greet())
         }
     }
 }
