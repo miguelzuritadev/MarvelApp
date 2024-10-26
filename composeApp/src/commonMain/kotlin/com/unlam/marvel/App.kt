@@ -22,12 +22,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.unlam.marvel.Crypto.md5
 import com.unlam.marvel.network.Character
+import com.unlam.marvel.network.MarvelClientImpl
+import com.unlam.marvel.network.MarvelRepository
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import marvelapp.composeapp.generated.resources.Res
 import marvelapp.composeapp.generated.resources.placeholder
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -62,6 +67,16 @@ fun App() {
             )
             val items = arrayListOf(element1, element2, element1, element2, element1, element2)
             CharacterLazyVerticalGrid(items)
+
+            val scope = rememberCoroutineScope()
+            LaunchedEffect(true) {
+                scope.launch {
+                    val repository = MarvelRepository(MarvelClientImpl())
+                    val timestamp = Time.getTimeStamp()
+                    val characters = repository.getCharacters(timestamp, md5(timestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
+                    println("==characters.size: ${characters.size}==")
+                }
+            }
         }
     }
 }

@@ -36,6 +36,8 @@ watchfaceComplicationsDataSourceKtx = "1.1.1"
 
 #ktor
 ktor = "2.3.6"
+napier = "2.6.1"
+ktorLogbackClassic = "1.2.11"
 
 #coil
 coil3 = "3.0.0-alpha06"
@@ -84,8 +86,12 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-logging-jvm = { module = "ch.qos.logback:logback-classic", version.ref = "ktorLogbackClassic" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
+ktor-napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 
 
 coil3-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
@@ -101,3 +107,4 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ktor-client-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.ktor.client.serialization)
 }
 
 kotlin {
@@ -36,11 +37,18 @@ kotlin {
             api(libs.ktor.client.content.negotiation)
             api(libs.ktor.client.logging)
             api(libs.ktor.serialization.kotlinx.json)
+            api(libs.ktor.napier)
 
             api(libs.coil3.core)
             api(libs.coil3.mp)
             api(libs.coil3.compose)
             api(libs.coil3.network.ktor)
+        }
+
+        iosMain{
+            dependencies {
+                implementation(libs.ktor.client.ios)
+            }
         }
     }
 }
