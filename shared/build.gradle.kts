@@ -30,6 +30,17 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
+
+            // Ktor
+            api(libs.ktor.client.core)
+            api(libs.ktor.client.content.negotiation)
+            api(libs.ktor.client.logging)
+            api(libs.ktor.serialization.kotlinx.json)
+
+            api(libs.coil3.core)
+            api(libs.coil3.mp)
+            api(libs.coil3.compose)
+            api(libs.coil3.network.ktor)
         }
     }
 }
