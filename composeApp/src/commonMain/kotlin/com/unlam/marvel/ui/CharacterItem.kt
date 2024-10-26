@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
@@ -27,6 +26,7 @@ import marvelapp.composeapp.generated.resources.Res
 import marvelapp.composeapp.generated.resources.placeholder
 import marvelapp.composeapp.generated.resources.placeholder_error_image
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,18 +84,4 @@ fun CharacterItem(
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CharacterItemPreview() {
-    CharacterItem(
-        character = Character(
-            id = 1,
-            name = "A.I.M.",
-            description = "Advanced Idea Mechanics",
-            thumbnailUrl = "https://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec.jpg"
-        ),
-        onClick = {}
-    )
 }

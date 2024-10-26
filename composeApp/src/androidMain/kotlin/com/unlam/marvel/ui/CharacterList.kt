@@ -70,3 +70,18 @@ fun CharacterListPreview() {
 
     CharacterList(data = items, isLoading = false)
 }
+
+
+@Preview(showBackground = true)
+@Composable
+fun CharacterItemPreview() {
+    CharacterItem(
+        character = Character(
+            id = 1,
+            name = "A.I.M.",
+            description = "Advanced Idea Mechanics",
+            thumbnailUrl = "https://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec.jpg"
+        ),
+        onClick = {}
+    )
+}
