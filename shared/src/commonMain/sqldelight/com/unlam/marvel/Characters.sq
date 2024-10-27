@@ -1,0 +1,27 @@
+CREATE TABLE Character (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT,
+    thumbnail_url TEXT
+);
+
+insertCharacter:
+INSERT INTO Character(id, name, description, thumbnail_url)
+VALUES (?, ?, ?, ?);
+
+updateCharacter:
+UPDATE Character
+SET name = ?, description = ?, thumbnail_url = ?
+WHERE id = ?;
+
+deleteAllCharacters:
+DELETE FROM Character;
+
+deleteCharacter:
+DELETE FROM Character WHERE id = ?;
+
+getAllCharacters:
+SELECT * FROM Character;
+
+getCharacter:
+SELECT * FROM Character WHERE id = ?;

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.ktor.client.serialization)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -39,6 +40,7 @@ kotlin {
             api(libs.ktor.serialization.kotlinx.json)
             api(libs.ktor.napier)
 
+            // coil
             api(libs.coil3.core)
             api(libs.coil3.mp)
             api(libs.coil3.compose)
@@ -47,8 +49,23 @@ kotlin {
 
         iosMain{
             dependencies {
+                //ktor
                 implementation(libs.ktor.client.ios)
+                //sql
+                implementation(libs.sqlite.ios.driver)
             }
+        }
+
+        androidMain.dependencies {
+            //sql
+            implementation(libs.sqlite.android.driver)
+            // AndroidX startup
+            api(libs.androidx.startup.runtime)
+        }
+
+        jvmMain.dependencies {
+            //sql
+            implementation(libs.sqlite.driver)
         }
     }
 }
@@ -62,5 +79,13 @@ android {
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+}
+
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("com.unlam.marvel")
+        }
     }
 }

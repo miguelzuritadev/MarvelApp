@@ -80,7 +80,7 @@ fun CharacterItemPreview() {
             id = 1,
             name = "A.I.M.",
             description = "Advanced Idea Mechanics",
-            thumbnailUrl = "https://i.annihil.us/u/prod/marvel/i/mg/6/20/52602f21f29ec.jpg"
+            thumbnailUrl = "http://i.annihil.us/u/prod/marvel/i/mg/9/30/535feab462a64.jpg"
         ),
         onClick = {}
     )

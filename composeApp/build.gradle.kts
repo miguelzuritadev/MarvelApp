@@ -25,11 +25,10 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-
-            implementation(libs.ktor.client.android)
-
-
+            //ktor
+            implementation(libs.ktor.client.okhttp)
         }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -44,6 +43,7 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            //ktor
             implementation(libs.ktor.client.okhttp)
             implementation(libs.ktor.client.logging.jvm)
         }

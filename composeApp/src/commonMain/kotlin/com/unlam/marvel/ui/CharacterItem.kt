@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,9 +25,7 @@ import marvelapp.composeapp.generated.resources.Res
 import marvelapp.composeapp.generated.resources.placeholder
 import marvelapp.composeapp.generated.resources.placeholder_error_image
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterItem(
     modifier: Modifier = Modifier,
@@ -46,19 +43,6 @@ fun CharacterItem(
         shape = RoundedCornerShape(8.dp)
     ) {
         Column {
-            /*AsyncImage(
-                imageUrl = game.thumbnailUrl,
-                contentDescription = "Game",
-                contentScale = ContentScale.Crop,
-                loadingPlaceHolder = {},
-                modifier = modifier.fillMaxWidth().height(220.dp),
-                errorPlaceHolder = {},
-                alignment = Alignment.Center,
-                alpha = DefaultAlpha,
-                coloFilter = null,
-                filterQuality = DrawScope.DefaultFilterQuality,
-            )*/
-
             AsyncImage(
                 model = character.thumbnailUrl,
                 contentDescription = "Item",
@@ -66,7 +50,10 @@ fun CharacterItem(
                 alignment = Alignment.TopStart,
                 modifier = Modifier.fillMaxWidth().height(200.dp).clip(RoundedCornerShape(8.dp)),
                 placeholder = painterResource(Res.drawable.placeholder),
-                error = painterResource(Res.drawable.placeholder_error_image)
+                error = painterResource(Res.drawable.placeholder_error_image),
+                onError = { error ->
+                    println("==error: $error==")
+                }
             )
 
             Row(
