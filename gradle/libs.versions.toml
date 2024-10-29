@@ -51,6 +51,9 @@ uiToolingPreviewDesktop = "1.7.0"
 #sql
 sqlDelightDriver = "2.0.1"
 
+#datastore
+datastore = "1.1.1"
+
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -113,6 +116,10 @@ sqlite-ios-driver = { module = "app.cash.sqldelight:native-driver", version.ref 
 
 # Android context
 androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntime" }
+
+# datastore
+datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 androidx-ui-tooling-preview-desktop = { group = "androidx.compose.ui", name = "ui-tooling-preview-desktop", version.ref = "uiToolingPreviewDesktop" }
 

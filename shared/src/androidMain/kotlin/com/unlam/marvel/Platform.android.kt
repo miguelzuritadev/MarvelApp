@@ -22,3 +22,7 @@ actual class DatabaseDriverFactory actual constructor() {
         return AndroidSqliteDriver(Database.Schema, AppContextWrapper.appContext!!, DB_NAME)
     }
 }
+
+actual fun resolveDataStorePath(): String {
+    return AppContextWrapper.appContext!!.filesDir.resolve(DATA_STORE_FILE_NAME).absolutePath
+}

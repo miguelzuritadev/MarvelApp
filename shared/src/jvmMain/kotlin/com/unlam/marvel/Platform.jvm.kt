@@ -23,7 +23,7 @@ actual class DatabaseDriverFactory {
         val parentFolder = if (isDebug) {
             File(temporalDirectory)
         } else {
-            File(System.getProperty("user.home") + "/MyFancyApp")
+            File(System.getProperty("user.home") + "/MarvelApp")
         }
         if (!parentFolder.exists()) {
             parentFolder.mkdirs()
@@ -43,4 +43,23 @@ actual class DatabaseDriverFactory {
         return driver
     }
 
+}
+
+actual fun resolveDataStorePath(): String {
+    val isDebug = true
+    val temporalDirectory = System.getProperty("java.io.tmpdir")
+    val parentFolder = if (isDebug) {
+        File(temporalDirectory)
+    } else {
+        File(System.getProperty("user.home") + "/MarvelApp")
+    }
+    if (!parentFolder.exists()) {
+        parentFolder.mkdirs()
+    }
+    val databasePath = if (isDebug) {
+        File(temporalDirectory, DATA_STORE_FILE_NAME)
+    } else {
+        File(parentFolder, DATA_STORE_FILE_NAME)
+    }
+    return databasePath.absolutePath
 }

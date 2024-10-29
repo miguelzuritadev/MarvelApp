@@ -45,6 +45,9 @@ kotlin {
             api(libs.coil3.mp)
             api(libs.coil3.compose)
             api(libs.coil3.network.ktor)
+
+            //datastore
+            api(libs.datastore.preferences)
         }
 
         iosMain{
