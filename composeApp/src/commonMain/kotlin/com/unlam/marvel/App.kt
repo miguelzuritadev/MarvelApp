@@ -38,7 +38,12 @@ fun App() {
             LaunchedEffect(Unit) {
                 scope.launch {
                     val localRepository = LocalCharacterDBRepositoryImp(createDatabase(DatabaseDriverFactory()))
-                    val characterList = localRepository.getAll()
+                    val characterList: List<LocalCharacter> = localRepository.getAll()
+
+                    items.value = characterList.map {
+                        it.toModel()
+                    }
+
                     println("==characterList: $characterList==")
 
                     val dataStoreWrapper = DataStoreWrapper()
@@ -54,7 +59,7 @@ fun App() {
                     if (differenceMs < ttl) {
                         println("==Data is still fresh==")
                         return@launch
-                    } else{
+                    } else {
                         //clean local cache and get new data
                         println("==Data is stale==")
                     }
