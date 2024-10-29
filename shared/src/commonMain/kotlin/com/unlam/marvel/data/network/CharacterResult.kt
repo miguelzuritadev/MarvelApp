@@ -1,4 +1,4 @@
-package com.unlam.marvel.network
+package com.unlam.marvel.data.network
 
 import kotlinx.serialization.Serializable
 

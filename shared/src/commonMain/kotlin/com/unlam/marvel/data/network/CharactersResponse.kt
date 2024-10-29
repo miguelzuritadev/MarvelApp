@@ -1,5 +1,6 @@
-package com.unlam.marvel.network
+package com.unlam.marvel.data.network
 
+import com.unlam.marvel.domain.model.Character
 import kotlinx.serialization.Serializable
 
 

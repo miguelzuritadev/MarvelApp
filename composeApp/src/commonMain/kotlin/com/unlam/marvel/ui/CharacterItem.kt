@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.unlam.marvel.network.Character
+import com.unlam.marvel.domain.model.Character
 import marvelapp.composeapp.generated.resources.Res
 import marvelapp.composeapp.generated.resources.placeholder
 import marvelapp.composeapp.generated.resources.placeholder_error_image

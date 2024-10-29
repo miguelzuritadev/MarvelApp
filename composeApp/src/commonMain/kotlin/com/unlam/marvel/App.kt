@@ -12,11 +12,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.unlam.marvel.Crypto.md5
-import com.unlam.marvel.data.LocalCharacter
-import com.unlam.marvel.data.LocalCharacterDBRepositoryImp
-import com.unlam.marvel.network.Character
-import com.unlam.marvel.network.MarvelClientImpl
-import com.unlam.marvel.network.MarvelRepository
+import com.unlam.marvel.data.local.LocalCharacter
+import com.unlam.marvel.data.local.LocalCharacterDBRepositoryImp
+import com.unlam.marvel.domain.model.Character
+import com.unlam.marvel.data.network.MarvelClientImpl
+import com.unlam.marvel.data.network.MarvelRepository
 import com.unlam.marvel.preferences.DataStoreRepository
 import com.unlam.marvel.preferences.DataStoreWrapper
 import com.unlam.marvel.ui.CharacterItem
@@ -63,6 +63,18 @@ fun App() {
                     val timestamp = Time.getTimeStamp()
                     val characters = repository.getCharacters(timestamp, md5(timestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
                     items.value = characters
+
+                    //save characters in local cache
+                    localRepository.deleteAll()
+                    characters.forEach {
+                        val localCharacter = LocalCharacter(
+                            it.id,
+                            it.name,
+                            it.description,
+                            it.thumbnailUrl
+                        )
+                        localRepository.insert(localCharacter)
+                    }
 
 
                     val localCharacter = LocalCharacter(

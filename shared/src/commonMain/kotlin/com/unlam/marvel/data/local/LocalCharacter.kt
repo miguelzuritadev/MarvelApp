@@ -1,4 +1,4 @@
-package com.unlam.marvel.data
+package com.unlam.marvel.data.local
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,4 +1,4 @@
-package com.unlam.marvel.data
+package com.unlam.marvel.data.local
 
 import com.unlam.marvel.CharactersQueries
 import com.unlam.marvel.Database

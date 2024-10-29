@@ -1,4 +1,6 @@
-package com.unlam.marvel.network
+package com.unlam.marvel.data.network
+
+import com.unlam.marvel.domain.model.Character
 
 class MarvelRepository(val client: IMarvelClient) {
     suspend fun getCharacters(timestamp: Long, md5: String): List<Character> {

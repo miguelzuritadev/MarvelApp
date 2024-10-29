@@ -1,4 +1,4 @@
-package com.unlam.marvel.network
+package com.unlam.marvel.data.network
 
 import com.unlam.marvel.PUBLIC_KEY
 import com.unlam.marvel.initLogger
