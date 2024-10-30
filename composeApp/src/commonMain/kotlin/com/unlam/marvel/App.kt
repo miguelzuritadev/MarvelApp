@@ -12,16 +12,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.unlam.marvel.Crypto.md5
-import com.unlam.marvel.data.local.LocalCharacter
-import com.unlam.marvel.data.local.LocalCharacterDBRepositoryImp
 import com.unlam.marvel.domain.model.Character
 import com.unlam.marvel.data.network.MarvelClientImpl
 import com.unlam.marvel.data.network.MarvelRepository
+import com.unlam.marvel.domain.LocalCacheManager
 import com.unlam.marvel.preferences.DataStoreRepository
-import com.unlam.marvel.preferences.DataStoreWrapper
 import com.unlam.marvel.ui.AppViewModel
 import com.unlam.marvel.ui.CharacterItem
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.java.KoinJavaComponent.inject
@@ -33,6 +30,9 @@ import org.koin.java.KoinJavaComponent.inject
 fun App() {
     MaterialTheme {
         val viewModel: AppViewModel by inject(AppViewModel::class.java)
+        val localCacheManager: LocalCacheManager by inject(LocalCacheManager::class.java)
+
+        val currentTime = System.currentTimeMillis()
 
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             val scope = rememberCoroutineScope()
@@ -40,17 +40,8 @@ fun App() {
                 scope.launch {
                     viewModel.getLocalCharacters()
 
-                    val dataStoreWrapper = DataStoreWrapper()
-                    val dataStoreRepository = DataStoreRepository(dataStoreWrapper.resolveDataStore())
-                    val dataStoreTimestamp = dataStoreRepository.readTimestamp().first()
-                    println("==timestamp: $dataStoreTimestamp==")
-
                     //evaluate ttl before fetching data
-                    val currentTime = System.currentTimeMillis()
-                    val ttl = 1000 * 60 * 2 // 2 minutes
-                    val differenceMs = currentTime - dataStoreTimestamp
-                    println("differenceMs: $differenceMs")
-                    if (differenceMs < ttl) {
+                    if (localCacheManager.useCache(currentTime)) {
                         println("==Data is still fresh==")
                         return@launch
                     } else {
@@ -65,7 +56,7 @@ fun App() {
 
                     viewModel.saveLocalCharacters(characters)
 
-                    dataStoreRepository.saveTimestamp(currentTime)
+                    localCacheManager.saveTimestamp(currentTime)
                 }
             }
 
