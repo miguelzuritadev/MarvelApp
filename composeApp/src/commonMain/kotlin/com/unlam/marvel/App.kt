@@ -38,14 +38,7 @@ fun App() {
             val scope = rememberCoroutineScope()
             LaunchedEffect(Unit) {
                 scope.launch {
-                    val localRepository = LocalCharacterDBRepositoryImp(createDatabase(DatabaseDriverFactory()))
-                    val characterList: List<LocalCharacter> = localRepository.getAll()
-
-                    viewModel.items.value = characterList.map {
-                        it.toModel()
-                    }
-
-                    println("==characterList: $characterList==")
+                    viewModel.getLocalCharacters()
 
                     val dataStoreWrapper = DataStoreWrapper()
                     val dataStoreRepository = DataStoreRepository(dataStoreWrapper.resolveDataStore())
@@ -70,17 +63,7 @@ fun App() {
                     val characters = repository.getCharacters(timestamp, md5(timestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
                     viewModel.items.value = characters
 
-                    //save characters in local cache
-                    localRepository.deleteAll()
-                    characters.forEach {
-                        val localCharacter = LocalCharacter(
-                            it.id,
-                            it.name,
-                            it.description,
-                            it.thumbnailUrl
-                        )
-                        localRepository.insert(localCharacter)
-                    }
+                    viewModel.saveLocalCharacters(characters)
 
                     dataStoreRepository.saveTimestamp(currentTime)
                 }
