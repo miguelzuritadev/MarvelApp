@@ -5,12 +5,12 @@ import com.unlam.marvel.Crypto.md5
 import com.unlam.marvel.PRIVATE_KEY
 import com.unlam.marvel.PUBLIC_KEY
 import com.unlam.marvel.data.local.LocalCharacter
-import com.unlam.marvel.data.local.LocalCharacterRepository
-import com.unlam.marvel.data.network.MarvelRepository
+import com.unlam.marvel.data.local.ILocalCharacterRepository
+import com.unlam.marvel.data.network.IMarvelRepository
 import com.unlam.marvel.domain.model.Character
 import org.koin.core.component.KoinComponent
 
-class AppViewModel(val localRepository: LocalCharacterRepository, val networkRepository: MarvelRepository) : KoinComponent {
+class AppViewModel(val localRepository: ILocalCharacterRepository, val networkRepository: IMarvelRepository) : KoinComponent {
 
     val items = mutableStateOf(listOf<Character>())
 

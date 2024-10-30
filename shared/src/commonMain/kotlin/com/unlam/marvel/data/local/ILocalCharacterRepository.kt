@@ -1,7 +1,7 @@
 package com.unlam.marvel.data.local
 
 
-interface LocalCharacterRepository {
+interface ILocalCharacterRepository {
     suspend fun insert(character: LocalCharacter): Unit
     suspend fun deleteAll(): Unit
     suspend fun delete(id: Long): Unit

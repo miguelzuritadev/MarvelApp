@@ -2,8 +2,8 @@ package com.unlam.marvel.data.network
 
 import com.unlam.marvel.domain.model.Character
 
-class MarvelRepository(val client: IMarvelClient) {
-    suspend fun getCharacters(timestamp: Long, md5: String): List<Character> {
+class MarvelRepositoryImpl(val client: IMarvelClient) : IMarvelRepository {
+    override suspend fun getCharacters(timestamp: Long, md5: String): List<Character> {
         return client.getCharacters(timestamp, md5).toModel()
     }
 

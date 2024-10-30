@@ -4,7 +4,7 @@ import com.unlam.marvel.CharactersQueries
 import com.unlam.marvel.Database
 
 
-class LocalCharacterDBRepositoryImp(db: Database) : LocalCharacterRepository {
+class LocalCharacterDBRepositoryImp(db: Database) : ILocalCharacterRepository {
 
     private val query: CharactersQueries = db.charactersQueries
 
