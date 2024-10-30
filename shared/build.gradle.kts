@@ -48,6 +48,10 @@ kotlin {
 
             //datastore
             api(libs.datastore.preferences)
+
+            //koin
+            api(libs.koin.core)
+            api(libs.koin.compose)
         }
 
         iosMain{
@@ -64,6 +68,8 @@ kotlin {
             implementation(libs.sqlite.android.driver)
             // AndroidX startup
             api(libs.androidx.startup.runtime)
+            //koin
+            api(libs.koin.android)
         }
 
         jvmMain.dependencies {

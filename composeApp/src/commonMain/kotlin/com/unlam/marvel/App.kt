@@ -19,10 +19,12 @@ import com.unlam.marvel.data.network.MarvelClientImpl
 import com.unlam.marvel.data.network.MarvelRepository
 import com.unlam.marvel.preferences.DataStoreRepository
 import com.unlam.marvel.preferences.DataStoreWrapper
+import com.unlam.marvel.ui.AppViewModel
 import com.unlam.marvel.ui.CharacterItem
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.java.KoinJavaComponent.inject
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -30,17 +32,16 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     MaterialTheme {
-        val items = remember { mutableStateOf(listOf<Character>()) }
+        val viewModel: AppViewModel by inject(AppViewModel::class.java)
+
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-
-
             val scope = rememberCoroutineScope()
             LaunchedEffect(Unit) {
                 scope.launch {
                     val localRepository = LocalCharacterDBRepositoryImp(createDatabase(DatabaseDriverFactory()))
                     val characterList: List<LocalCharacter> = localRepository.getAll()
 
-                    items.value = characterList.map {
+                    viewModel.items.value = characterList.map {
                         it.toModel()
                     }
 
@@ -67,7 +68,7 @@ fun App() {
                     val repository = MarvelRepository(MarvelClientImpl())
                     val timestamp = Time.getTimeStamp()
                     val characters = repository.getCharacters(timestamp, md5(timestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
-                    items.value = characters
+                    viewModel.items.value = characters
 
                     //save characters in local cache
                     localRepository.deleteAll()
@@ -81,22 +82,14 @@ fun App() {
                         localRepository.insert(localCharacter)
                     }
 
-
-                    val localCharacter = LocalCharacter(
-                        1009146,
-                        "Emil Blonsky",
-                        "Formerly known as Emil Blonsky, a spy of Soviet Yugoslavian origin working for the KGB, the Abomination gained his powers after receiving a dose of gamma radiation similar to that which transformed Bruce Banner into the incredible Hulk.",
-                        "http://i.annihil.us/u/prod/marvel/i/mg/9/50/4ce18691cbf04.jpg"
-                    )
-                    localRepository.insert(localCharacter)
-
                     dataStoreRepository.saveTimestamp(currentTime)
                 }
             }
 
-            CharacterLazyVerticalGrid(items.value)
+            CharacterLazyVerticalGrid(viewModel.items.value)
         }
     }
+
 }
 
 @ExperimentalFoundationApi

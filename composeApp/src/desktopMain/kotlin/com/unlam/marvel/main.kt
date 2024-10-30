@@ -5,9 +5,14 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.unlam.marvel.di.commonModule
 import com.unlam.marvel.domain.model.Character
+import org.koin.core.context.startKoin
 
 fun main() = application {
+    startKoin {
+        modules(commonModule())
+    }
     Window(onCloseRequest = ::exitApplication, title = "MarvelApp") {
         App()
     }
