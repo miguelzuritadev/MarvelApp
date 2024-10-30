@@ -4,6 +4,8 @@ import com.unlam.marvel.DatabaseDriverFactory
 import com.unlam.marvel.createDatabase
 import com.unlam.marvel.data.local.LocalCharacterDBRepositoryImp
 import com.unlam.marvel.data.local.LocalCharacterRepository
+import com.unlam.marvel.data.network.MarvelClientImpl
+import com.unlam.marvel.data.network.MarvelRepository
 import com.unlam.marvel.domain.LocalCacheManager
 import com.unlam.marvel.preferences.DataStoreRepository
 import com.unlam.marvel.preferences.DataStoreWrapper
@@ -14,9 +16,11 @@ fun commonModule() = module {
 
     single { DataStoreRepository(DataStoreWrapper().resolveDataStore()) }
 
-    single {LocalCacheManager(get())}
+    single { LocalCacheManager(get()) }
 
     single<LocalCharacterRepository> { LocalCharacterDBRepositoryImp(createDatabase(DatabaseDriverFactory())) }
 
-    single { AppViewModel(get()) }
+    single { MarvelRepository(MarvelClientImpl()) }
+
+    single { AppViewModel(get(), get()) }
 }

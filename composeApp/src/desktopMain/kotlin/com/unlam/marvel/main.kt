@@ -7,6 +7,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.unlam.marvel.di.commonModule
 import com.unlam.marvel.domain.model.Character
+import com.unlam.marvel.ui.CharacterLazyVerticalGrid
 import org.koin.core.context.startKoin
 
 fun main() = application {

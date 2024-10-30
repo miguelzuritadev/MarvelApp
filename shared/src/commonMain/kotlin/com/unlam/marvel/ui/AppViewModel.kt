@@ -1,12 +1,16 @@
 package com.unlam.marvel.ui
 
 import androidx.compose.runtime.mutableStateOf
+import com.unlam.marvel.Crypto.md5
+import com.unlam.marvel.PRIVATE_KEY
+import com.unlam.marvel.PUBLIC_KEY
 import com.unlam.marvel.data.local.LocalCharacter
 import com.unlam.marvel.data.local.LocalCharacterRepository
+import com.unlam.marvel.data.network.MarvelRepository
 import com.unlam.marvel.domain.model.Character
 import org.koin.core.component.KoinComponent
 
-class AppViewModel(val localRepository: LocalCharacterRepository) : KoinComponent {
+class AppViewModel(val localRepository: LocalCharacterRepository, val networkRepository: MarvelRepository) : KoinComponent {
 
     val items = mutableStateOf(listOf<Character>())
 
@@ -37,5 +41,11 @@ class AppViewModel(val localRepository: LocalCharacterRepository) : KoinComponen
             )
             localRepository.insert(localCharacter)
         }
+    }
+
+    suspend fun getNetworkCharactersAndSaveLocalCache(timestamp: Long) {
+        val characters = networkRepository.getCharacters(timestamp, md5(timestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
+        items.value = characters
+        saveLocalCharacters(characters)
     }
 }
