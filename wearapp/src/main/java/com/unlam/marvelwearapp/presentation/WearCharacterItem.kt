@@ -66,16 +66,16 @@ fun WearCharacterItem(
                 modifier = Modifier
                     .fillMaxSize()
                     .immersiveListGradient(),
-                contentAlignment = Alignment.TopStart,
+                contentAlignment = Alignment.Center,
             ) {
                 Column(
                     modifier
                         .fillMaxWidth()
                         .padding(horizontal = 8.dp)
                 ) {
-                    Text(text = character.name, fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(text = character.name, fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onPrimary, lineHeight = 12.sp)
                     Text(
-                        text = character.description, fontSize = 10.sp,
+                        text = character.description, fontSize = 10.sp, lineHeight = 10.sp,
                         maxLines = 1, modifier = modifier.padding(vertical = 4.dp),
                         fontWeight = FontWeight.W300, color = MaterialTheme.colorScheme.onPrimary
                     )
@@ -91,18 +91,18 @@ fun WearCharacterItem(
 fun WearCharacterItemPreview() {
     val item = Character(
         id = 1,
-        name = "Character Name",
+        name = "Character Name (Emil Blonsky) 123456 123456 123456",
         description = "Description of the character",
         thumbnailUrl = "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg"
     )
     Column {
-        Text(text = "Character Item1", fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
-        Text(text = "Character Item2", fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
+        Text(text = "Item1", fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
+        Text(text = "Item2", fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
 
         WearCharacterItem(modifier = Modifier, character = item) {
 
         }
-        Text(text = "Character Item3", fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
+        Text(text = "Item3", fontSize = 20.sp, color = MaterialTheme.colorScheme.onPrimary)
     }
 
 }

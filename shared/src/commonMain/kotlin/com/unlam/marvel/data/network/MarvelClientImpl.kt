@@ -19,7 +19,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 class MarvelClientImpl: IMarvelClient {
-    val baseUrl = "gateway.marvel.com"
+
 
     private val client = HttpClient() {
         install(Logging){
@@ -38,7 +38,7 @@ class MarvelClientImpl: IMarvelClient {
             )
         }
         defaultRequest {
-            host = baseUrl
+            host = BASE_URL
             url {
                 protocol = URLProtocol.HTTPS
                 parameters.append("apikey", PUBLIC_KEY)
@@ -54,8 +54,13 @@ class MarvelClientImpl: IMarvelClient {
         val response = client.get("v1/public/characters") {
             parameter("ts", timestamp)
             parameter("hash", md5)
-            parameter("limit", 10)
+            parameter("limit", CHARACTER_LIMIT)
         }
         return response.body()
+    }
+
+    companion object {
+        const val CHARACTER_LIMIT = 20
+        const val BASE_URL = "gateway.marvel.com"
     }
 }
