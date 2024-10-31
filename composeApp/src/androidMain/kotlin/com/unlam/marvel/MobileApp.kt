@@ -5,13 +5,13 @@ import com.unlam.marvel.di.commonModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class MarvelApp : Application() {
+class MobileApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
         // Start Koin
         startKoin {
-            androidContext(this@MarvelApp)
+            androidContext(this@MobileApp)
             modules(commonModule())
         }
     }

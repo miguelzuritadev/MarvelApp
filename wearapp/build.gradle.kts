@@ -65,4 +65,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(projects.shared)
+
+    //ktor
+    implementation(libs.ktor.client.okhttp)
 }
