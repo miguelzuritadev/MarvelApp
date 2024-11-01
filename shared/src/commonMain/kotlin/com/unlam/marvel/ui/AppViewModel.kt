@@ -18,7 +18,7 @@ class AppViewModel(val localRepository: ILocalCharacterRepository, val networkRe
         return "Hello, Marvel!"
     }
 
-    suspend fun getLocalCharacters() {
+    suspend fun getCharactersFromLocal() {
         val characterList: List<LocalCharacter> = localRepository.getAll()
         items.value = characterList.map {
             it.toModel()
@@ -41,7 +41,7 @@ class AppViewModel(val localRepository: ILocalCharacterRepository, val networkRe
         }
     }
 
-    suspend fun getNetworkCharactersAndSaveLocalCache(timestamp: Long) {
+    suspend fun getCharactersFromNetworkAndSaveToLocalCache(timestamp: Long) {
         val characters = networkRepository.getCharacters(timestamp, md5(timestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
         items.value = characters
         saveLocalCharacters(characters)

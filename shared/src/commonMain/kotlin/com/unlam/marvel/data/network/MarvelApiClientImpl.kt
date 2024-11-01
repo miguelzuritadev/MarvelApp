@@ -18,7 +18,7 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-class MarvelClientImpl: IMarvelClient {
+class MarvelApiClientImpl: IMarvelApiClient {
 
 
     private val client = HttpClient() {

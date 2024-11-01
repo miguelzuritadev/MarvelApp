@@ -45,7 +45,7 @@ fun TvApp(modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope()
     LaunchedEffect(Unit) {
         scope.launch {
-            viewModel.getLocalCharacters()
+            viewModel.getCharactersFromLocal()
 
             //evaluate ttl before fetching data
             if (localCacheManager.useCache(timestamp)) {
@@ -53,7 +53,7 @@ fun TvApp(modifier: Modifier = Modifier) {
                 return@launch
             }
 
-            viewModel.getNetworkCharactersAndSaveLocalCache(timestamp)
+            viewModel.getCharactersFromNetworkAndSaveToLocalCache(timestamp)
 
             localCacheManager.saveTimestamp(timestamp)
         }

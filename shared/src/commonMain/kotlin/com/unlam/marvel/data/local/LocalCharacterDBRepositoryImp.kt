@@ -9,16 +9,16 @@ class LocalCharacterDBRepositoryImp(db: Database) : ILocalCharacterRepository {
     private val query: CharactersQueries = db.charactersQueries
 
     override suspend fun getAll(): List<LocalCharacter> {
-        return query.getAllCharacters(::mapToCharacter).executeAsList()
+        return query.getAllCharacters(::mapToLocalCharacter).executeAsList()
     }
 
     override suspend fun getBy(id: Long): LocalCharacter {
-        return query.getCharacter(id, ::mapToCharacter).executeAsOne()
+        return query.getCharacter(id, ::mapToLocalCharacter).executeAsOne()
     }
 
     override suspend fun insert(character: LocalCharacter) {
         // Check if the character already exists
-        val existingCharacter = query.getCharacter(character.id, ::mapToCharacter).executeAsOneOrNull()
+        val existingCharacter = query.getCharacter(character.id, ::mapToLocalCharacter).executeAsOneOrNull()
         if (existingCharacter == null) {
             query.insertCharacter(character.id, character.name, character.description, character.url)
         } else {
@@ -34,7 +34,7 @@ class LocalCharacterDBRepositoryImp(db: Database) : ILocalCharacterRepository {
         query.deleteCharacter(id)
     }
 
-    private fun mapToCharacter(id: Long, name: String, description: String?, thumbnailUrl: String?): LocalCharacter {
+    private fun mapToLocalCharacter(id: Long, name: String, description: String?, thumbnailUrl: String?): LocalCharacter {
         return LocalCharacter(id, name, description, thumbnailUrl)
     }
 }

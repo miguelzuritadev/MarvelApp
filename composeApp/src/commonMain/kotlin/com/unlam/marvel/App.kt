@@ -31,7 +31,7 @@ fun App() {
             val scope = rememberCoroutineScope()
             LaunchedEffect(Unit) {
                 scope.launch {
-                    viewModel.getLocalCharacters()
+                    viewModel.getCharactersFromLocal()
 
                     //evaluate ttl before fetching data
                     if (localCacheManager.useCache(timestamp)) {
@@ -42,7 +42,7 @@ fun App() {
                         println("==Data is stale==")
                     }
 
-                    viewModel.getNetworkCharactersAndSaveLocalCache(timestamp)
+                    viewModel.getCharactersFromNetworkAndSaveToLocalCache(timestamp)
 
                     localCacheManager.saveTimestamp(timestamp)
                 }
