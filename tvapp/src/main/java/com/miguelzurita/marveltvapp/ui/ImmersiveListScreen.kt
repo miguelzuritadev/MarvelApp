@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,6 +31,11 @@ import com.unlam.marvel.domain.model.Character
 @Composable
 fun ImmersiveListScreen(characterList: List<Character>) {
     var selectedCharacter by remember { mutableStateOf(characterList.firstOrNull()) }
+
+    // Reset selectedCharacter to the first item on recomposition if characterList changes
+    LaunchedEffect(characterList) {
+        selectedCharacter = characterList.firstOrNull() ?: selectedCharacter
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         // background image

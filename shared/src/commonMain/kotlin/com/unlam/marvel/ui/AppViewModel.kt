@@ -23,8 +23,6 @@ class AppViewModel(val localRepository: ILocalCharacterRepository, val networkRe
         items.value = characterList.map {
             it.toModel()
         }
-
-        println("==characterList: $characterList==")
     }
 
     /**
