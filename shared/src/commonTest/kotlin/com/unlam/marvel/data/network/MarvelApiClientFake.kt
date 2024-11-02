@@ -1,6 +1,6 @@
 package com.unlam.marvel.data.network
 
-class MarvelApiClientTest : IMarvelApiClient {
+class MarvelApiClientFake : IMarvelApiClient {
     // Create a fake CharactersResponse
     val fakeCharacters = listOf(
         CharacterResult(id = 1, name = "Spider-Man", description = "Friendly neighborhood Spider-Man", thumbnail = Thumbnail(path = "http://example.com/spiderman", extension = "jpg")),

@@ -1,10 +1,10 @@
 package com.unlam.marvel.ui
 
 
-import LocalCharacterDBRepositoryTest
+import LocalCharacterDBRepositoryFake
 import com.unlam.marvel.data.local.ILocalCharacterRepository
 import com.unlam.marvel.data.network.IMarvelRepository
-import com.unlam.marvel.data.network.MarvelApiClientTest
+import com.unlam.marvel.data.network.MarvelApiClientFake
 import com.unlam.marvel.data.network.MarvelRepositoryImpl
 import com.unlam.marvel.domain.LocalCacheManager
 import com.unlam.marvel.domain.model.Character
@@ -32,8 +32,8 @@ class AppVIewModelTest:KoinTest {
     private val testModule = module {
         single { DataStoreRepository(DataStoreWrapper().resolveDataStore()) }
         single { LocalCacheManager(get()) }
-        single<ILocalCharacterRepository> { LocalCharacterDBRepositoryTest() }
-        single<IMarvelRepository> { MarvelRepositoryImpl(MarvelApiClientTest()) }
+        single<ILocalCharacterRepository> { LocalCharacterDBRepositoryFake() }
+        single<IMarvelRepository> { MarvelRepositoryImpl(MarvelApiClientFake()) }
         single { AppViewModel(get(), get()) }
     }
 
@@ -71,7 +71,7 @@ class AppVIewModelTest:KoinTest {
     @Test
     fun testGetCharactersFromNetworkAndSaveToLocalCache() =  runTest {
         // Given
-        val expected = MarvelApiClientTest().charactersResponse.toModel()
+        val expected = MarvelApiClientFake().charactersResponse.toModel()
         val timestamp = 1000L
 
         // When

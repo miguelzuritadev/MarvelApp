@@ -1,7 +1,7 @@
 import com.unlam.marvel.data.local.ILocalCharacterRepository
 import com.unlam.marvel.data.local.LocalCharacter
 
-class LocalCharacterDBRepositoryTest : ILocalCharacterRepository {
+class LocalCharacterDBRepositoryFake : ILocalCharacterRepository {
 
     private val characters = ArrayList<LocalCharacter>()
 
