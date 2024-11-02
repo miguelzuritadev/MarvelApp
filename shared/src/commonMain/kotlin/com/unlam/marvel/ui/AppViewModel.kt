@@ -7,6 +7,7 @@ import com.unlam.marvel.PUBLIC_KEY
 import com.unlam.marvel.data.local.LocalCharacter
 import com.unlam.marvel.data.local.ILocalCharacterRepository
 import com.unlam.marvel.data.network.IMarvelRepository
+import com.unlam.marvel.domain.SortCharacterDecorator
 import com.unlam.marvel.domain.model.Character
 import org.koin.core.component.KoinComponent
 
@@ -19,10 +20,11 @@ class AppViewModel(val localRepository: ILocalCharacterRepository, val networkRe
     }
 
     suspend fun getCharactersFromLocal() {
-        val characterList: List<LocalCharacter> = localRepository.getAll()
-        items.value = characterList.map {
+        val localCharacters: List<LocalCharacter> = localRepository.getAll()
+        val characterList = localCharacters.map {
             it.toModel()
         }
+        items.value = SortCharacterDecorator(characterList).toList()
     }
 
     /**
@@ -42,8 +44,8 @@ class AppViewModel(val localRepository: ILocalCharacterRepository, val networkRe
     }
 
     suspend fun getCharactersFromNetworkAndSaveToLocalCache(timestamp: Long) {
-        val characters = networkRepository.getCharacters(timestamp, md5(timestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
-        items.value = characters
-        saveLocalCharacters(characters)
+        val characterList = networkRepository.getCharacters(timestamp, md5(timestamp.toString() + PRIVATE_KEY + PUBLIC_KEY))
+        items.value = SortCharacterDecorator(characterList).toList()
+        saveLocalCharacters(characterList)
     }
 }
