@@ -54,6 +54,12 @@ kotlin {
             api(libs.koin.compose)
         }
 
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.koinTest)
+            implementation(libs.kotlinx.coroutines.test)
+        }
+
         iosMain{
             dependencies {
                 //ktor
