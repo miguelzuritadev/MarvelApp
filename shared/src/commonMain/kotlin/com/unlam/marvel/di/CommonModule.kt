@@ -10,12 +10,13 @@ import com.unlam.marvel.data.network.MarvelRepositoryImpl
 import com.unlam.marvel.domain.LocalCacheManager
 import com.unlam.marvel.preferences.DataStoreRepository
 import com.unlam.marvel.preferences.DataStoreWrapper
+import com.unlam.marvel.preferences.IDataStoreRepository
 import com.unlam.marvel.ui.AppViewModel
 import org.koin.dsl.module
 
 fun commonModule() = module {
 
-    single { DataStoreRepository(DataStoreWrapper().resolveDataStore()) }
+    single<IDataStoreRepository> { DataStoreRepository(DataStoreWrapper().resolveDataStore()) }
 
     single { LocalCacheManager(get()) }
 

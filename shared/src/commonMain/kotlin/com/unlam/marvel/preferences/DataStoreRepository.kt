@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 
-class DataStoreRepository(private val dataStore: DataStore<Preferences>) {
+class DataStoreRepository(private val dataStore: DataStore<Preferences>) : IDataStoreRepository {
     companion object {
         val TIMESTAMP_KEY = longPreferencesKey(name = "timestamp_key")
     }
 
-    suspend fun saveTimestamp(timestamp: Long): Boolean {
+    override suspend fun saveTimestamp(timestamp: Long): Boolean {
         return try {
             dataStore.edit { preferences ->
                 preferences.set(key = TIMESTAMP_KEY, value = timestamp)
@@ -26,7 +26,7 @@ class DataStoreRepository(private val dataStore: DataStore<Preferences>) {
         }
     }
 
-    fun readTimestamp(): Flow<Long> {
+    override fun readTimestamp(): Flow<Long> {
         return dataStore.data
             .catch { emptyFlow<Long>() }
             .map { preferences ->

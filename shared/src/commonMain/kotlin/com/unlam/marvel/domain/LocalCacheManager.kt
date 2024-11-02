@@ -1,18 +1,18 @@
 package com.unlam.marvel.domain
 
-import com.unlam.marvel.preferences.DataStoreRepository
+import com.unlam.marvel.preferences.IDataStoreRepository
 import kotlinx.coroutines.flow.first
 
-class LocalCacheManager(val dataStoreRepository: DataStoreRepository) {
-
-    private val ttl = 1000 * 60 * 2 // 2 minutes
+/**
+ * By default it use 2 minutes as time to live (ttl)
+ */
+class LocalCacheManager(val dataStoreRepository: IDataStoreRepository, val ttl:Long = 1000 * 60 * 2) {
 
     suspend fun useCache(currentTime: Long): Boolean {
         val dataStoreTimestamp = dataStoreRepository.readTimestamp().first()
-        println("==timestamp: $dataStoreTimestamp==")
 
         val differenceMs = currentTime - dataStoreTimestamp
-        println("differenceMs: $differenceMs")
+        println("difference ${differenceMs/1000} seconds")
 
         return (differenceMs < ttl)
     }
