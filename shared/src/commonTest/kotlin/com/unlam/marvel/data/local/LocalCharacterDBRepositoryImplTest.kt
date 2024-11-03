@@ -22,63 +22,63 @@ class LocalCharacterDBRepositoryImplTest {
     }
 
     @Test
-    fun testInsertAndGetCharacter() = runTest {
+    fun getBy_should_return_the_inserted_character() = runTest {
+        // Arrange
         repository.deleteAll()
-        // Given
-        val character = LocalCharacter(1, "name", "description", "url")
+        val expected = LocalCharacter(1, "name", "description", "url")
+        repository.insert(expected)
 
-        // When
-        repository.insert(character)
+        // Act
         val result = repository.getBy(1)
 
-        // Then
-        assertEquals(character, result)
+        // Assert
+        assertEquals(expected, result)
     }
 
     @Test
-    fun testGetAllCharacters() = runTest {
+    fun getAll_should_return_all_inserted_characters() = runTest {
         repository.deleteAll()
-        // Given
+        // Arrange
         val character1 = LocalCharacter(1, "name1", "description1", "url1")
         val character2 = LocalCharacter(2, "name2", "description2", "url2")
         repository.insert(character1)
         repository.insert(character2)
 
-        // When
+        // Act
         val result = repository.getAll()
 
-        // Then
+        // Assert
         assertEquals(listOf(character1, character2), result)
     }
 
     @Test
-    fun testDeleteCharacter() = runTest {
+    fun delete_should_remove_the_character_from_database() = runTest {
         repository.deleteAll()
-        // Given
+        // Arrange
         val character = LocalCharacter(1, "name", "description", "url")
         repository.insert(character)
 
-        // When
+        // Act
         repository.delete(1)
         val result = repository.getAll()
 
-        // Then
+        // Assert
         assertEquals(emptyList(), result)
     }
 
     @Test
-    fun testDeleteAllCharacters() = runTest {
-        // Given
+    fun deleteAll_should_remove_all_characters_from_database() = runTest {
+        // Arrange
         val character1 = LocalCharacter(1, "name1", "description1", "url1")
         val character2 = LocalCharacter(2, "name2", "description2", "url2")
         repository.insert(character1)
         repository.insert(character2)
 
-        // When
+        // Act
         repository.deleteAll()
         val result = repository.getAll()
 
-        // Then
+        // Assert
         assertEquals(emptyList(), result)
     }
 }

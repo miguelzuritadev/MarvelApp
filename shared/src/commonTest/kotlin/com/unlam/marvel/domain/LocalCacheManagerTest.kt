@@ -36,41 +36,41 @@ class LocalCacheManagerTest {
     }
 
     @Test
-    fun testUseCache_withinTTL() = runTest {
-        // Given
+    fun useCache_within_ttl_should_return_true() = runTest {
+        // Arrange
         val currentTime = 1730553215L
         fakeDataStoreRepository.saveTimestamp(currentTime - 1000) // 1 second ago
 
-        // When
+        // Act
         val result = localCacheManager.useCache(currentTime)
 
-        // Then
+        // Assert
         assertTrue(result)
     }
 
     @Test
-    fun testUseCache_outsideTTL() = runTest {
-        // Given
+    fun useCache_outside_ttl_should_return_false() = runTest {
+        // Arrange
         val currentTime = 1730553215L
         fakeDataStoreRepository.saveTimestamp(currentTime - 1000 * 60 * 3) // 3 minutes ago
 
-        // When
+        // Act
         val result = localCacheManager.useCache(currentTime)
 
-        // Then
+        // Assert
         assertFalse(result)
     }
 
     @Test
-    fun testSaveTimestamp() = runTest {
-        // Given
+    fun saveTimestamp_should_save_the_given_timestamp() = runTest {
+        // Arrange
         val timestamp = 1730553215L
 
-        // When
+        // Act
         localCacheManager.saveTimestamp(timestamp)
         val savedTimestamp = fakeDataStoreRepository.readTimestamp().first()
 
-        // Then
+        // Assert
         assertEquals(timestamp, savedTimestamp)
     }
 }

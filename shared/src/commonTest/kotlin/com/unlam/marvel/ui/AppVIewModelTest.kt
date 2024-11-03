@@ -24,11 +24,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class AppVIewModelTest:KoinTest {
+class AppVIewModelTest : KoinTest {
 
     private lateinit var viewModel: AppViewModel
 
-    // Koin module
+    // Test Koin module
     private val testModule = module {
         single { DataStoreRepository(DataStoreWrapper().resolveDataStore()) }
         single { LocalCacheManager(get()) }
@@ -39,47 +39,45 @@ class AppVIewModelTest:KoinTest {
 
     @BeforeTest
     fun setUp() {
-        // Start Koin
         startKoin {
             modules(testModule)
         }
-        viewModel = get() // Get the ViewModel instance
+        viewModel = get()
     }
 
     @AfterTest
     fun tearDown() {
-        // Stop Koin
         stopKoin()
     }
 
     @Test
-    fun testSaveToLocalAndFetchCharactersFromLocal() = runTest{
-        // Given
+    fun getCharactersFromLocal_should_return_characters_from_local() = runTest {
+        // Arrange
         val character = Character(1, "name", "description", "image")
         val characters = listOf(character)
         viewModel.saveLocalCharacters(characters)
 
-        // When
+        // Act
         viewModel.getCharactersFromLocal()
         runCurrent()
         val result = viewModel.items.value
 
-        // Then
+        // Assert
         assertEquals(characters, result)
     }
 
     @Test
-    fun testGetCharactersFromNetworkAndSaveToLocalCache() =  runTest {
-        // Given
+    fun getCharactersFromNetworkAndSaveToLocalCache_should_return_expected_characters() = runTest {
+        // Arrange
         val expected = MarvelApiClientFake().charactersResponse.toModel()
         val timestamp = 1000L
 
-        // When
+        // Act
         viewModel.getCharactersFromNetworkAndSaveToLocalCache(timestamp)
         runCurrent()
         val result = viewModel.items.value
 
-        // Then
+        // Assert
         assertEquals(expected, result)
     }
 }
