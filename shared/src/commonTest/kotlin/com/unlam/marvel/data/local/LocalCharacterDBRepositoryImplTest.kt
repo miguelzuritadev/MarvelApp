@@ -14,19 +14,27 @@ class LocalCharacterDBRepositoryImplTest {
     private lateinit var repository: LocalCharacterDBRepositoryImp
     private lateinit var database: Database
 
-
     @BeforeTest
     fun setUp() {
         database = createDatabase(DatabaseDriverFactory())
         repository = LocalCharacterDBRepositoryImp(database)
     }
 
+    private suspend fun populateDatabaseWithFakeNumberOfCharacters(numberOfCharacters: Int = 2): List<LocalCharacter> {
+        repository.deleteAll()
+        val characterList = mutableListOf<LocalCharacter>()
+        for (i in 1..numberOfCharacters) {
+            val character = LocalCharacter(i.toLong(), "name$i", "description$i", "url$i")
+            repository.insert(character)
+            characterList.add(character)
+        }
+        return characterList
+    }
+
     @Test
     fun getBy_should_return_the_inserted_character() = runTest {
         // Arrange
-        repository.deleteAll()
-        val expected = LocalCharacter(1, "name", "description", "url")
-        repository.insert(expected)
+        val expected = populateDatabaseWithFakeNumberOfCharacters()[0]
 
         // Act
         val result = repository.getBy(1)
@@ -37,26 +45,21 @@ class LocalCharacterDBRepositoryImplTest {
 
     @Test
     fun getAll_should_return_all_inserted_characters() = runTest {
-        repository.deleteAll()
         // Arrange
-        val character1 = LocalCharacter(1, "name1", "description1", "url1")
-        val character2 = LocalCharacter(2, "name2", "description2", "url2")
-        repository.insert(character1)
-        repository.insert(character2)
+        val characterList = populateDatabaseWithFakeNumberOfCharacters()
 
         // Act
         val result = repository.getAll()
 
         // Assert
-        assertEquals(listOf(character1, character2), result)
+        assertEquals(characterList, result)
     }
+
 
     @Test
     fun delete_should_remove_the_character_from_database() = runTest {
-        repository.deleteAll()
         // Arrange
-        val character = LocalCharacter(1, "name", "description", "url")
-        repository.insert(character)
+        populateDatabaseWithFakeNumberOfCharacters(1)
 
         // Act
         repository.delete(1)
@@ -69,10 +72,7 @@ class LocalCharacterDBRepositoryImplTest {
     @Test
     fun deleteAll_should_remove_all_characters_from_database() = runTest {
         // Arrange
-        val character1 = LocalCharacter(1, "name1", "description1", "url1")
-        val character2 = LocalCharacter(2, "name2", "description2", "url2")
-        repository.insert(character1)
-        repository.insert(character2)
+        populateDatabaseWithFakeNumberOfCharacters()
 
         // Act
         repository.deleteAll()
