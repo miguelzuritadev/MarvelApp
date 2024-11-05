@@ -1,0 +1,4 @@
+package com.unlam.marvel
+
+val PUBLIC_KEY = ""
+val PRIVATE_KEY = ""
