@@ -1,17 +1,65 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
+# 🌟 Marvel Multiplatform Project 🌟
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+Welcome to the Marvel Multiplatform Project! This proof of concept project leverages the power of the Marvel API across multiple platforms, including Android (Mobile, WearOs, Android TV) and Desktop. 🚀
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## 📁 Project Structure
 
-* `/shared` is for the code that will be shared between all targets in the project.
-  The most important subfolder is `commonMain`. If preferred, you can add code to the platform-specific folders here too.
+* `/shared` - Code shared between all targets.
+  * `commonMain` - The most important subfolder for shared code.
+  * Platform-specific folders for additional platform-specific code.
+
+* `/composeApp` - Code for Compose Mobile and Desktop.
+* `/wearApp` - Code for WearOs.
+* `/tvApp` - Code for Android TV.
+
+## 📁 Project Preview
+
+### 📱 Mobile
+
+<p align="center">
+  <img src="readme_assets/mobile.gif" alt="Mobile Preview">
+</p>
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+### 🖥️ Desktop
+
+<p align="center">
+  <img src="readme_assets/desktop.gif" alt="Desktop Preview">
+</p>
+
+### ⌚ WearOs
+
+<p align="center">
+  <img src="readme_assets/wear.gif" alt="WearOs Preview">
+</p>
+
+### 📺 Android TV
+
+<p align="center">
+  <img src="readme_assets/tv.gif" alt="Android TV Preview">
+</p>
+
+
+## 🛠️ Technologies Used
+
+- **Kotlin Multiplatform**
+- **Ktor**: Networking.
+- **SQLDelight**: Local Database management.
+- **Koin**: Dependency injection.
+- **DataStore**: Local preferences storage.
+
+
+## 🚀 Getting Started
+
+1. Clone the repository.
+2. Open the project in Android Studio.
+3. Create a Constants.kt based on Constants.kt.example and add your Marvel API keys.
+4. Sync the project with Gradle.
+5. Run the project on your desired platform.
+
+## 📚 Learn More
+
+- [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)
+- [Kotlin Multiplatform Wizard](https://kmp.jetbrains.com/)
+
+## 🎉 Enjoy exploring the Marvel universe across all your devices! 🎉
